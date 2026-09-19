@@ -1,0 +1,238 @@
+/* App additions on top of the vendored AniKatsu theme. */
+
+/* ------- Hero slider (lightweight) ------- */
+.deslide-wrap { position: relative; }
+#hero-slider .deslide-item { opacity: 0; pointer-events: none; transition: opacity .8s ease; }
+#hero-slider .deslide-item.active { opacity: 1; pointer-events: auto; }
+#hero-slider .sc-detail { margin-bottom: 16px; }
+#hero-slider .sc-detail .scd-item { display: inline-block; margin-right: 12px; color: #e6e6e6; font-size: 13px; }
+#hero-slider .sc-detail .scd-item i { margin-right: 5px; color: #ef547a; }
+#hero-slider .sc-detail .quality {
+  display: inline-block; background: #ef547a; color: #fff;
+  padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: 700;
+}
+#hero-slider .sc-detail .quality.bg-white { background: #fff; color: #202125; }
+.hero-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(42, 44, 49, .7);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 44px;
+  text-align: center;
+}
+.hero-nav:hover { background: #ef547a; }
+.hero-nav.prev { left: 24px; }
+.hero-nav.next { right: 24px; }
+.hero-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.hero-dots button {
+  width: 10px; height: 10px;
+  border: none; border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  cursor: pointer; padding: 0;
+}
+.hero-dots button.active { background: #ef547a; width: 26px; border-radius: 6px; }
+@media (max-width: 768px) { .deslide { padding-bottom: 260px; } .hero-nav { display: none; } }
+
+/* ------- Episode list / player ------- */
+.section-player { margin-bottom: 26px; }
+.player-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.player-frame iframe { width: 100%; height: 100%; border: 0; }
+.pb-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin-top: 12px;
+}
+.pb-title { font-size: 16px; font-weight: 600; }
+.pb-lang { color: #aaa; font-size: 12px; text-transform: uppercase; }
+.pb-actions { display: flex; gap: 8px; }
+.pb-action {
+  background: #2a2c31; color: #fff; border: 1px solid #3a3c42;
+  border-radius: 5px; padding: 7px 14px; cursor: pointer; font-size: 13px;
+}
+.pb-action:hover { color: #ef547a; border-color: #ef547a; }
+.pb-action:disabled { opacity: .4; cursor: default; }
+.pb-note { color: #888; font-size: 12px; margin-top: 8px; }
+
+.lang-toggle { display: flex; gap: 6px; }
+.langbtn {
+  background: #2a2c31; color: #ddd; border: 1px solid #3a3c42;
+  border-radius: 5px; padding: 6px 18px; cursor: pointer; font-size: 13px; font-weight: 600;
+}
+.langbtn.active { background: #ef547a; border-color: #ef547a; color: #fff; }
+.langbtn:disabled { opacity: .4; cursor: default; }
+
+.episodes { display: flex; flex-direction: column; gap: 6px; max-height: 440px; overflow-y: auto; padding-right: 4px; }
+.ep-tile {
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  background: #2a2c31; border: 1px solid #3a3c42; color: #fff;
+  border-radius: 5px; padding: 9px 12px; cursor: pointer;
+}
+.ep-tile:hover { border-color: #ef547a; color: #ef547a; }
+.ep-tile.active { background: #ef547a; border-color: #ef547a; color: #fff; }
+.ep-tile .ep-num { min-width: 58px; font-weight: 700; font-size: 13px; }
+.ep-tile .ep-title { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ep-tile.released { position: relative; }
+
+.ep-groups { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.ep-group {
+  background: #2a2c31; border: 1px solid #3a3c42; color: #aaa;
+  padding: 6px 12px; border-radius: 5px; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.ep-group:hover { border-color: #ef547a; color: #ef547a; }
+.ep-group.active { background: #ef547a; border-color: #ef547a; color: #fff; }
+
+.watch-wrap { display: flex; flex-direction: column; gap: 16px; }
+.watch-main { flex: 1 1 auto; min-width: 0; }
+.watch-side .cat-heading { margin: 4px 0 12px; }
+@media (min-width: 992px) {
+  .watch-container { max-width: 100%; }
+  .watch-container #main-content { width: 100%; float: none; }
+  .watch-wrap { flex-direction: row; align-items: flex-start; }
+  .watch-side { flex: 0 0 380px; width: 380px; }
+  .watch-side .cat-heading { margin: 0 0 12px; }
+}
+
+.ep-tile.unreleased { opacity: .4; cursor: default; }
+.ep-tile.unreleased:hover { border-color: #3a3c42; color: #fff; }
+
+/* ------- Film grid rows ------- */
+.film_list-row { display: flex; flex-direction: column; gap: 8px; }
+.film-row {
+  display: flex; gap: 14px; align-items: center;
+  background: #2a2c31; border-radius: 6px; padding: 8px; text-decoration: none; color: #fff;
+}
+.film-row:hover { background: #34363c; }
+.film-row img { width: 46px; height: 64px; object-fit: cover; border-radius: 4px; }
+.film-row .fr-name { font-size: 14px; font-weight: 600; }
+.film-row .fr-sub { color: #999; font-size: 12px; }
+
+/* ------- Top anime sidebar ------- */
+.top-item {
+  display: flex; gap: 10px; align-items: center; text-decoration: none;
+  color: #fff; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.top-item:last-child { border-bottom: none; }
+.top-rank { width: 26px; font-weight: 700; color: #ef547a; text-align: center; }
+.top-item img { width: 46px; height: 62px; object-fit: cover; border-radius: 4px; }
+.top-name { font-size: 13px; font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.top-sub { color: #999; font-size: 11px; }
+
+/* ------- Search results ------- */
+.search-block { margin-top: 10px; }
+.status-note { color: #aaa; text-align: center; padding: 40px 0; display: block; }
+
+/* ------- Section tabs (home) ------- */
+.sec-tabs { display: inline-flex; background: #2a2c31; border-radius: 5px; overflow: hidden; }
+.sec-tabs button {
+  border: none; background: transparent; color: #bbb; padding: 7px 14px; cursor: pointer;
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .3px;
+}
+.sec-tabs button:hover { color: #fff; }
+.sec-tabs button.active { background: #ef547a; color: #fff; }
+.viewmore-inline { display: inline-block; margin-left: 12px; vertical-align: middle; }
+.viewmore-inline .btn { font-size: 12px; padding: 1px 3px; margin: 5px 0; color: #aaa; }
+
+/* ------- Top anime panel tabs ------- */
+.top-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.top-tabs button {
+  border: 1px solid #3a3c42; background: transparent; color: #aaa; padding: 3px 12px;
+  border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; text-transform: uppercase;
+}
+.top-tabs button.active { background: #ef547a; border-color: #ef547a; color: #fff; }
+
+.block_area { margin-bottom: 26px; }
+.section-empty { color: #888; font-size: 13px; padding: 8px 0; display: block; }
+
+/* ------- News / Newly Added / Just Completed list ------- */
+.news-list { border: 1px solid #2a2c31; border-radius: 6px; overflow: hidden; }
+.news-list-head, .news-row {
+  display: grid; grid-template-columns: 1fr 44px 86px 96px; align-items: center; gap: 10px;
+  padding: 9px 14px;
+}
+.news-list-head {
+  background: #2a2c31; color: #8f8f95; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .3px;
+}
+.news-row { border-top: 1px solid #24262a; color: #e5e5e7; font-size: 13px; text-decoration: none; transition: background .15s; }
+.news-row:hover { background: #27292e; color: #fff; }
+.news-row .news-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.news-eps, .news-type, .news-date { color: #9a9aa0; text-align: center; font-size: 12px; }
+.news-list-head span { text-align: center; }
+.news-list-head span:first-child { text-align: left; }
+.news-eps { text-align: center; }
+.news-row .news-eps { color: #ef547a; font-weight: 700; }
+
+/* ------- A-Z list ------- */
+.az-list { border: 1px solid #2a2c31; border-radius: 6px; padding: 14px; }
+.az-sub { color: #8f8f95; font-size: 13px; margin-bottom: 10px; }
+.az-letters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.az-letters a {
+  padding: 5px 10px; border: 1px solid #3a3c42; border-radius: 4px; color: #cfd0d4;
+  font-size: 13px; font-weight: 600; text-decoration: none;
+}
+.az-letters a:hover { background: #ef547a; border-color: #ef547a; color: #fff; }
+
+/* ------- Continue Watching ------- */
+.continue-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.cw-item { display: flex; gap: 10px; background: #2a2c31; border-radius: 6px; padding: 8px; text-decoration: none; }
+.cw-item:hover { background: #33353a; }
+.cw-poster { position: relative; width: 62px; height: 88px; flex: none; overflow: hidden; border-radius: 4px; }
+.cw-poster img { width: 100%; height: 100%; object-fit: cover; }
+.cw-play {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .45); color: #fff; font-size: 16px; opacity: 0; transition: opacity .15s;
+}
+.cw-item:hover .cw-play { opacity: 1; }
+.cw-ep { position: absolute; left: 0; bottom: 0; right: 0; background: rgba(239, 84, 122, .92); color: #fff; font-size: 10px; font-weight: 700; text-align: center; padding: 1px 0; }
+.cw-body { min-width: 0; display: flex; flex-direction: column; justify-content: space-between; }
+.cw-name { font-size: 13px; font-weight: 600; color: #e7e7e9; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cw-subs { color: #9a9aa0; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cw-bar { height: 4px; background: #45474d; border-radius: 4px; overflow: hidden; }
+.cw-fill { height: 100%; background: #ef547a; }
+.cw-time { color: #9a9aa0; font-size: 11px; }
+
+/* ------- Header random icon ------- */
+#pick_menu .pmu-fa i { color: #ef547a; font-size: 18px; line-height: 1; }
+#pick_menu .pmu-fa:hover i { color: #fff; }
+
+/* ------- Top anime panel ------- */
+.cbox .top-item { align-items: center; }
+.cbox .top-item .top-info { flex: 1; min-width: 0; }
+.cbox .top-item .top-rank { color: #ef547a; font-weight: 800; }
+.cbox .top-item .top-sub { color: #9a9aa0; font-size: 11px; }
+
+/* ------- Discussion ------- */
+.disc-row { border-bottom: 1px solid #24262a; padding: 8px 0; }
+.disc-row .disc-name { color: #ef547a; font-size: 12px; font-weight: 700; }
+.disc-row .disc-body { color: #dcdddf; font-size: 14px; }
+
+/* ------- Footer ------- */
+#footer-custom {
+  color: #aaa; font-size: 12px; text-align: center;
+  border-top: 1px solid #2a2c31; padding: 20px 0 30px; margin-top: 40px;
+}
+#footer-custom a { color: #aaa; }
+#footer-custom a:hover { color: #ef547a; }
